@@ -5,6 +5,14 @@ import TaskList from './components/TaskList';
 
 function App() {
   const [tasks, setTasks] = useState([]);
+
+  const deleteTaskById = (id) => {
+    const afterDeletion = tasks.filter((task) => {
+      return task.id !== id;
+    });
+    setTasks(afterDeletion);
+  };
+
   const createTask = (title, taskDesc) => {
     const createdTasks = [
       ...tasks,
@@ -21,7 +29,7 @@ function App() {
     <div className="App">
       <TaskCreate onCreate={createTask} />
       <h1>Task List</h1>
-      <TaskList tasks={tasks} />
+      <TaskList tasks={tasks} onDelete={deleteTaskById} />
     </div>
   );
 }
